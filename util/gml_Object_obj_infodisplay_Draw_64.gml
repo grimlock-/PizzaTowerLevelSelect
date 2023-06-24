@@ -123,6 +123,9 @@ switch obj_player1.state
 	case 290:
 		s += "BACK TO HUB"
 		break
+	case 292:
+		s += "SPACESHUTTLE"
+		break
 	case 296:
 		s += "SECRETENTER"
 		break
@@ -132,8 +135,15 @@ draw_thing(concat("Y: ", string(obj_player1.y)))
 draw_thing(concat("X: ", string(obj_player1.x)))
 draw_thing(concat("STATE ", s))
 draw_thing(concat("LAST ROOM: ", string(obj_player.lastroom), " ", string_upper(room_get_name(obj_player.lastroom))))
-draw_thing(concat("HUBROOM: ", string(obj_player.backtohubroom), " ", string_upper(room_get_name(obj_player.backtohubroom))))
 draw_thing(concat("ROOM: ", string(room), " ", string_upper(room_get_name(room))))
+if(ds_list_size(global.saveroom) == 0)
+	draw_thing("LAST KILL: NONE")
+else
+{
+	var pos = ds_list_size(global.saveroom) - 1
+	var _id = ds_list_find_value(global.saveroom, pos)
+	draw_thing(concat("LAST KILL: ", _id))
+}
 
 
 //draw_thing(concat("LAST ROOM: ", string(obj_player.lastroom), " ", string_upper(room_get_name(obj_player.lastroom))))

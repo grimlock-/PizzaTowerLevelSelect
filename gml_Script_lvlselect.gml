@@ -832,6 +832,23 @@ function levelselect_prep_john(argument0)
 			ds_list_add(global.saveroom, 156316)
 			ds_list_add(global.saveroom, 156317)
 			break
+		case "forest":
+			with(obj_player1)
+			{
+				hallway = 1
+				hallwaydirection = 2
+				isgustavo = 1
+			}
+			break
+		case "space":
+			with(obj_player)
+			{
+				state = 292
+				visible = false
+				sprite_index = spr_idle
+			}
+			instance_create(obj_spaceshuttlestop.x, camera_get_view_y(view_camera[0]) - 50, obj_spaceshuttletrans);
+			break
 		case "minigolf":
 			//115607 - room 1 golf block
 			//115688 - room 2 golf block
@@ -842,9 +859,17 @@ function levelselect_prep_john(argument0)
 			ds_list_add(global.saveroom, 115738)
 			ds_list_add(global.saveroom, 116060)
 			break
+		case "street":
+			obj_player1.isgustavo = 1
+			break
 		case "sewer":
 			obj_player.hallway = 1
 			obj_player.hallwaydirection = -2
+			break
+		case "freezer":
+			global.noisejetpack = 1
+			obj_player.sprite_index = spr_player_poweredup
+			obj_player.image_index = 0
 			break
 		case "kidsparty":
 			ds_list_add(global.saveroom, 149157)
@@ -895,6 +920,9 @@ function levelselect_prep_john(argument0)
 			obj_player.sprite_index = spr_player_superjump
 			obj_player.verticalstate = 0
 			obj_player.verticalhall_vsp = -12
+			break
+		case "chateau":
+			instance_create(0, 0, obj_trapghost)
 			break
 	}
 }
@@ -969,22 +997,22 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			}
 			break
 		case "medieval":
+			//101610 - room 4 rat
 			//101498 - room 3 rat
 			//101777 - room 6 rat
 			//101957 - room 9 rat
 			//143569 - room 3b metal block
 			if(argument1 == 2)
 			{
-				with(obj_player1)
+				with(obj_player)
 				{
-					/*global.SAGEknighttaken = true;
-					state = 47
-					sprite_index = spr_knightpep_idle*/
-					sprite_index = spr_knightpepfall
-					state = 47
-					other.hsp = 0
-					other.vsp = 0
+					tauntstoredsprite = spr_knightpepfall
+					tauntstoredstate = 47
+					tauntstoredhsp = 0
+					tauntstoredvsp = 0
+					tauntstoredmovespeed = 10.50
 				}
+				ds_list_add(global.saveroom, 101610)
 				ds_list_add(global.saveroom, 101498)
 				ds_list_add(global.saveroom, 143569)
 			}
@@ -1086,8 +1114,20 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				ds_list_add(global.saveroom, 157532)
 			break
 		case "forest":
-			if(argument1 == 4)
+			//155970 - john pillar
+			if(argument1 == 2)
+			{
+				obj_player1.isgustavo = 1
+			}
+			else if(argument1 == 3)
+			{
+				obj_player1.isgustavo = 1
+			}
+			else if(argument1 == 4)
+			{
 				global.panic = 1
+				ds_list_add(global.saveroom, 155970)
+			}
 			break
 		case "space":
 			//127665 - secret cheese block
@@ -1110,6 +1150,16 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			if(argument1 == 4)
 				ds_list_add(global.saveroom, 116386)
 			break
+		case "street":
+			if(argument1 == 3)
+			{
+				obj_player1.isgustavo = 1
+			}
+			else if(argument1 == 4)
+			{
+				obj_player1.isgustavo = 1
+			}
+			break
 		case "industrial":
 			if(argument1 == 4)
 				global.panic = 1
@@ -1119,14 +1169,76 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				global.panic = 1
 			break
 		case "freezer":
-			if(argument1 == 3)
+			//135563 - room 6 temp control
+			//135561 & 135562 - room 6 snowmen
+			//rest in block - ice blocks
+			//136628 - room 15 ice block
+			if(argument1 == 2)
+			{
+				ds_list_add(global.saveroom, 135563)
+				ds_list_add(global.baddieroom, 135561)
+				ds_list_add(global.baddieroom, 135562)
+				ds_list_add(global.saveroom, 135608)
+				ds_list_add(global.saveroom, 135630)
+				ds_list_add(global.saveroom, 135598)
+				ds_list_add(global.saveroom, 135596)
+				ds_list_add(global.saveroom, 135597)
+				ds_list_add(global.saveroom, 135599)
+				ds_list_add(global.saveroom, 135616)
+				ds_list_add(global.saveroom, 135610)
+				ds_list_add(global.saveroom, 135609)
+				ds_list_add(global.saveroom, 135593)
+				ds_list_add(global.saveroom, 135594)
+				ds_list_add(global.saveroom, 135595)
+				ds_list_add(global.saveroom, 135600)
+				ds_list_add(global.saveroom, 135601)
+				ds_list_add(global.saveroom, 135603)
+				ds_list_add(global.saveroom, 135602)
+				ds_list_add(global.saveroom, 135604)
+				ds_list_add(global.saveroom, 135648)
+				ds_list_add(global.saveroom, 135647)
+				ds_list_add(global.saveroom, 135649)
+				ds_list_add(global.saveroom, 135650)
+				ds_list_add(global.saveroom, 135651)
+			}
+			else if(argument1 == 3)
+			{
 				ds_list_add(global.saveroom, 136628)
+			}
 			else if(argument1 == 4)
+			{
 				global.panic = 1
+				global.noisejetpack = 1
+				obj_player.sprite_index = spr_player_poweredup
+				obj_player.image_index = 0
+			}
 			break
 		case "chateau":
-			if(argument1 == 3 || argument1 == 4)
+			//118278 - room 8 rat pinball
+			//117722 - room 5 metal block
+			//117779 - room 5 rat pinball
+			//118477 - room 9 rat pinball
+			//118443 - room 9 john pillar
+			if(argument1 == 2)
+			{
+				ds_list_add(global.saveroom, 118278)
+				ds_list_add(global.saveroom, 117722)
+			}
+			else if(argument1 == 3)
+			{
 				global.panic = 1
+				ds_list_add(global.saveroom, 117779)
+				ds_list_add(global.saveroom, 117722)
+				ds_list_add(global.saveroom, 118477)
+				ds_list_add(global.saveroom, 118443)
+			}
+			else if(argument1 == 4)
+			{
+				global.panic = 1
+				ds_list_add(global.saveroom, 118477)
+				ds_list_add(global.saveroom, 117722)
+				ds_list_add(global.saveroom, 118443)
+			}
 			break
 		case "war":
 			if(argument1 == 1)
@@ -1136,6 +1248,16 @@ function levelselect_prep_levelsecret(argument0, argument1)
 					minutes = 0
 					seconds = 35
 				}
+				with(obj_player)
+				{
+					tauntstoredsprite = spr_shotgunidle
+					tauntstoredstate = 0
+					tauntstoredhsp = 0
+					tauntstoredvsp = 0
+					tauntstoredmovespeed = 0
+					shotgunAnim = 1
+					image_index = 0
+				}
 			}
 			else if(argument1 == 2)
 			{
@@ -1144,6 +1266,16 @@ function levelselect_prep_levelsecret(argument0, argument1)
 					minutes = 0
 					seconds = 52
 				}
+				with(obj_player)
+				{
+					tauntstoredsprite = spr_shotgunidle
+					tauntstoredstate = 0
+					tauntstoredhsp = 0
+					tauntstoredvsp = 0
+					tauntstoredmovespeed = 0
+					shotgunAnim = 1
+					image_index = 0
+				}
 			}
 			else if(argument1 == 3)
 			{
@@ -1151,6 +1283,16 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				{
 					minutes = 1
 					seconds = 20
+				}
+				with(obj_player)
+				{
+					tauntstoredsprite = spr_shotgunidle
+					tauntstoredstate = 0
+					tauntstoredhsp = 0
+					tauntstoredvsp = 0
+					tauntstoredmovespeed = 0
+					shotgunAnim = 1
+					image_index = 0
 				}
 			}
 			break

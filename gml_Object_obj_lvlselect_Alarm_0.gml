@@ -1,4 +1,3 @@
-//level change alarm
 with(obj_pause)
 {
 	scr_pause_stop_sounds()
