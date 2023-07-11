@@ -23,7 +23,8 @@ switch(dest_type)
 		global.level_seconds = 0;
 		global.leveltosave = lv
 		global.leveltorestart = levelselect_dest_room(ls_selected_floor, ls_selected_level, 0)
-		with(obj_player1)
+		//must be obj_player. otherwise you get kicked back to the title screen after finishing a level
+		with(obj_player)
 		{
 			mach2 = 0;
 			obj_camera.chargecamera = 0;
@@ -40,7 +41,8 @@ switch(dest_type)
 		global.level_seconds = 0;
 		global.leveltosave = lv
 		global.leveltorestart = rm
-		obj_player1.backtohubroom = hub_rm
+		with(obj_player)
+			backtohubroom = hub_rm
 		break
 		
 	case "secret-lv":
@@ -50,9 +52,12 @@ switch(dest_type)
 		global.level_seconds = 0;
 		global.leveltosave = lv
 		global.leveltorestart = rm
-		obj_player1.lastroom = levelselect_lastroom(lv, ls_selected_section)
-		obj_player1.secretportalID = levelselect_portalid(lv, ls_selected_section)
-		obj_player1.backtohubroom = hub_rm
+		with(obj_player)
+		{
+			lastroom = levelselect_lastroom(lv, other.ls_selected_section)
+			secretportalID = levelselect_portalid(lv, other.ls_selected_section)
+			backtohubroom = hub_rm
+		}
 		break
 		
 	case "secret-fl":
@@ -67,16 +72,7 @@ if(doreset)
 {
 	global.levelreset = 0
 	scr_playerreset()
-	//Setting levelreset to 1 causes a redundant call to scr_playerreset in obj_player's RoomStart
-	//which undoes the changes we need to make for some pillar rooms and floor secrets
-	/*if(ls_selected_section == 1 && lv != "war" || dest_type == "secret-fl")
-	{
-		instance_destroy(obj_comboend)
-		instance_destroy(obj_combotitle)
-		global.combodropped = false
-	}
-	else*/
-		global.levelreset = 1
+	global.levelreset = 1
 }
 
 obj_player1.targetRoom = rm

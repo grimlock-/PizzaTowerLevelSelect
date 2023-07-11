@@ -785,8 +785,22 @@ function levelselect_prep_john(argument0)
 	switch(argument0)
 	{
 		case "entrance":
+			//100552 - room 1 metal block
+			//100656 - room 3 metal block top
+			//100632 - room 3 metal block bottom
+			//100671 - room 4 metal block
+			//100700 - room 4 deadjohn
+			//100992 - room 7 marble block left
+			//101017 - room 7 marble block right
 			obj_player.hallway = 1
 			obj_player.hallwaydirection = 2
+			ds_list_add(global.saveroom, 100552)
+			ds_list_add(global.saveroom, 100656)
+			ds_list_add(global.saveroom, 100632)
+			ds_list_add(global.saveroom, 100671)
+			ds_list_add(global.saveroom, 100700)
+			ds_list_add(global.saveroom, 100992)
+			ds_list_add(global.saveroom, 101017)
 			break
 		case "medieval":
 			//101498 - room 3 rat
@@ -823,8 +837,10 @@ function levelselect_prep_john(argument0)
 		case "saloon":
 			//155322 - room 5 top rat
 			//155321 - room 5 bottom rat
+			//155319 - room 5 key
 			ds_list_add(global.saveroom, 155322)
 			ds_list_add(global.saveroom, 155321)
+			ds_list_add(global.saveroom, 155319)
 			break
 		case "plage":
 			//156316 - beach 1 block covering vertical hall
@@ -862,14 +878,24 @@ function levelselect_prep_john(argument0)
 		case "street":
 			obj_player1.isgustavo = 1
 			break
+		case "industrial":
+			obj_player.verticalhallway = 1
+			obj_player.vhallwaydirection = -2
+			obj_player.state = 97
+			obj_player.sprite_index = spr_player_superjump
+			obj_player.verticalstate = 0
+			obj_player.verticalhall_vsp = -12
+			break
 		case "sewer":
 			obj_player.hallway = 1
 			obj_player.hallwaydirection = -2
 			break
 		case "freezer":
+			//135121 - room 1 metal block
 			global.noisejetpack = 1
 			obj_player.sprite_index = spr_player_poweredup
 			obj_player.image_index = 0
+			ds_list_add(global.saveroom, 135121)
 			break
 		case "kidsparty":
 			ds_list_add(global.saveroom, 149157)
@@ -922,7 +948,11 @@ function levelselect_prep_john(argument0)
 			obj_player.verticalhall_vsp = -12
 			break
 		case "chateau":
+			//117218 - room 2 metal block
+			//117722 - room 5 metal block
 			instance_create(0, 0, obj_trapghost)
+			ds_list_add(global.saveroom, 117218)
+			ds_list_add(global.saveroom, 117722)
 			break
 	}
 }
@@ -979,21 +1009,49 @@ function levelselect_prep_floorsecret(argument0)
 function levelselect_prep_levelsecret(argument0, argument1)
 {
 	//fill values
-	//playerreset = 500 = 40s
-	//320 = 20s
-	//16 = 1s
-	//1860 = 2:33
-	//1260 = 1:43
-	//1100 = 1:30
 	switch(argument0)
 	{
 		case "entrance":
-			if(argument1 == 4)
+			//100552 - room 1 metal block
+			//100656 - room 3 metal block top
+			//100632 - room 3 metal block bottom
+			//100671 - room 4 metal block
+			//100700 - room 4 deadjohn
+			//100992 - room 7 marble block left
+			//101017 - room 7 marble block right
+			//101270 - room 10 john pillar
+			if(argument1 == 2)
 			{
-				global.fill = 1420
+				ds_list_add(global.saveroom, 100552)
+				ds_list_add(global.saveroom, 100656)
+				ds_list_add(global.saveroom, 100632)
+				ds_list_add(global.saveroom, 100671)
+				ds_list_add(global.saveroom, 100700)
+			}
+			else if(argument1 == 3)
+			{
+				ds_list_add(global.saveroom, 100552)
+				ds_list_add(global.saveroom, 100656)
+				ds_list_add(global.saveroom, 100632)
+				ds_list_add(global.saveroom, 100671)
+				ds_list_add(global.saveroom, 100700)
+				ds_list_add(global.saveroom, 100992)
+				ds_list_add(global.saveroom, 101017)
+			}
+			else if(argument1 == 4)
+			{
 				global.panic = 1
+				global.fill = 1420
 				global.minutes = 1
-				global.seconds = 50
+				global.seconds = 58
+				ds_list_add(global.saveroom, 100552)
+				ds_list_add(global.saveroom, 100656)
+				ds_list_add(global.saveroom, 100632)
+				ds_list_add(global.saveroom, 100671)
+				ds_list_add(global.saveroom, 100700)
+				ds_list_add(global.saveroom, 100992)
+				ds_list_add(global.saveroom, 101017)
+				ds_list_add(global.saveroom, 101270)
 			}
 			break
 		case "medieval":
@@ -1002,6 +1060,8 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			//101777 - room 6 rat
 			//101957 - room 9 rat
 			//143569 - room 3b metal block
+			//102059 - room 10 john pillar
+			//102054 - room 10 metal block
 			if(argument1 == 2)
 			{
 				with(obj_player)
@@ -1027,6 +1087,11 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				ds_list_add(global.saveroom, 101498)
 				ds_list_add(global.saveroom, 143569)
 				global.panic = 1
+				global.fill = 1440
+				global.minutes = 2
+				global.seconds = 0
+				ds_list_add(global.saveroom, 102059)
+				ds_list_add(global.saveroom, 102054)
 			}
 			break
 		case "ruin":
@@ -1051,7 +1116,7 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				global.fill = 2040
 				global.panic = 1
 				global.minutes = 2
-				global.seconds = 55
+				global.seconds = 50
 				ds_list_add(global.saveroom, 103361)
 				ds_list_add(global.saveroom, 102732)
 				ds_list_add(global.saveroom, 102755)
@@ -1061,6 +1126,7 @@ function levelselect_prep_levelsecret(argument0, argument1)
 		case "dungeon":
 			//104255 - room 3 secret block
 			//104740 - room 6 metal block
+			//105333 - room 10 john pillar
 			if(argument1 == 2)
 			{
 				ds_list_add(global.saveroom, 104255)
@@ -1072,42 +1138,68 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			break
 		case "badland":
 			//157972 - room 3 metal block
+			//159259 - mart 3 rat block
 			ds_list_add(global.saveroom, 157972)
-			if(argument1 == 4)
-				global.panic = 1
-			break
-		case "graveyard":
+			ds_list_add(global.saveroom, 159259)
 			if(argument1 == 4)
 			{
-				global.fill = 2500
+				global.fill = 2160
+				global.panic = 1
+				global.minutes = 3
+				global.seconds = 0
+			}
+			break
+		case "graveyard":
+			//109051 - room 6 john pillar
+			if(argument1 == 4)
+			{
+				global.fill = 2280
 				global.panic = 1
 				global.minutes = 3
 				global.seconds = 10
+				ds_list_add(global.saveroom, 109051)
 			}
 			break
 		case "farm":
 			//110364 - potato under priest
+			//110483 - room 11 john pillar
 			if(argument1 == 3)
 			{
 				ds_list_add(global.saveroom, 110364)
 			}
 			else if(argument1 == 4)
+			{
+				global.fill = 1440
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 0
+				ds_list_add(global.saveroom, 110483)
+			}
 			break
 		case "saloon":
 			//155322 - room 5 top rat
 			//155321 - room 5 bottom rat
+			//155319 - room 5 key
+			//155475 - room 6 john pillar
 			if(argument1 == 3)
 			{
 				ds_list_add(global.saveroom, 155322)
 				ds_list_add(global.saveroom, 155321)
 			}
 			else if(argument1 == 4)
+			{
+				global.fill = 1620
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 15
+				ds_list_add(global.saveroom, 155319)
+				ds_list_add(global.saveroom, 155475)
+			}
 			break
 		case "plage":
 			//156316 - beach 1 block covering vertical hall
 			//156317 - beach 1 block covering vertical hall
+			//157507 - cavern 2 john pillar
 			ds_list_add(global.saveroom, 156316)
 			ds_list_add(global.saveroom, 156317)
 			if(argument1 == 4)
@@ -1125,16 +1217,24 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			}
 			else if(argument1 == 4)
 			{
+				global.fill = 1740
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 25
 				ds_list_add(global.saveroom, 155970)
 			}
 			break
 		case "space":
 			//127665 - secret cheese block
+			//127322 - room 9 john pillar
 			if(argument1 == 4)
 			{
-				ds_list_add(global.saveroom, 127665)
+				global.fill = 1920
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 40
+				ds_list_add(global.saveroom, 127665)
+				ds_list_add(global.saveroom, 127322)
 			}
 			break
 		case "minigolf":
@@ -1143,6 +1243,7 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			//115738 - room 3 golf block
 			//116060 - room 4 rat block
 			//116386 - room 7 rat block
+			//116425 - room 8 john pillar
 			ds_list_add(global.saveroom, 115607)
 			ds_list_add(global.saveroom, 115688)
 			ds_list_add(global.saveroom, 115738)
@@ -1151,6 +1252,7 @@ function levelselect_prep_levelsecret(argument0, argument1)
 				ds_list_add(global.saveroom, 116386)
 			break
 		case "street":
+			//154145 - john pillar
 			if(argument1 == 3)
 			{
 				obj_player1.isgustavo = 1
@@ -1161,20 +1263,47 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			}
 			break
 		case "industrial":
+			//163596 - room 5 john pillar
 			if(argument1 == 4)
+			{
+				global.fill = 2340
 				global.panic = 1
+				global.minutes = 3
+				global.seconds = 15
+				ds_list_add(global.saveroom, 163596)
+			}
 			break
 		case "sewer":
+			//128718 - room 8 john pillar
 			if(argument1 == 4)
+			{
+				global.fill = 2400
 				global.panic = 1
+				global.minutes = 3
+				global.seconds = 20
+				ds_list_add(global.saveroom, 128718)
+			}
 			break
 		case "freezer":
+			//135121 - room 1 metal block
 			//135563 - room 6 temp control
 			//135561 & 135562 - room 6 snowmen
 			//rest in block - ice blocks
 			//136628 - room 15 ice block
+			//136442 - john pillar
+			//136477 - escape1 ice block
+			//136478 - escape1 ice block
+			//136147 - room 9 ice block
+			//136148 - room 9 ice block
+			//136149 - room 9 ice block
+			//135976 - room 7 ice block
+			//136006 - room 7 ice block
+			//135962 - room 7 ice block
+			//135963 - room 7 ice block
+			//135447 - room 4 ice block
 			if(argument1 == 2)
 			{
+				ds_list_add(global.saveroom, 135121)
 				ds_list_add(global.saveroom, 135563)
 				ds_list_add(global.baddieroom, 135561)
 				ds_list_add(global.baddieroom, 135562)
@@ -1203,30 +1332,52 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			}
 			else if(argument1 == 3)
 			{
+				ds_list_add(global.saveroom, 135121)
 				ds_list_add(global.saveroom, 136628)
 			}
 			else if(argument1 == 4)
 			{
+				global.fill = 2160
 				global.panic = 1
+				global.minutes = 3
+				global.seconds = 0
 				global.noisejetpack = 1
 				obj_player.sprite_index = spr_player_poweredup
 				obj_player.image_index = 0
+				ds_list_add(global.saveroom, 135121)
+				ds_list_add(global.saveroom, 136442)
+				ds_list_add(global.saveroom, 136477)
+				ds_list_add(global.saveroom, 136478)
+				ds_list_add(global.saveroom, 136147)
+				ds_list_add(global.saveroom, 136148)
+				ds_list_add(global.saveroom, 136149)
+				ds_list_add(global.saveroom, 135976)
+				ds_list_add(global.saveroom, 136006)
+				ds_list_add(global.saveroom, 135962)
+				ds_list_add(global.saveroom, 135963)
+				ds_list_add(global.saveroom, 135447)
 			}
 			break
 		case "chateau":
-			//118278 - room 8 rat pinball
+			//117218 - room 2 metal block
 			//117722 - room 5 metal block
 			//117779 - room 5 rat pinball
+			//118278 - room 8 rat pinball
 			//118477 - room 9 rat pinball
 			//118443 - room 9 john pillar
 			if(argument1 == 2)
 			{
-				ds_list_add(global.saveroom, 118278)
+				ds_list_add(global.saveroom, 117218)
 				ds_list_add(global.saveroom, 117722)
+				ds_list_add(global.saveroom, 118278)
 			}
 			else if(argument1 == 3)
 			{
+				global.fill = 1740
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 25
+				ds_list_add(global.saveroom, 117218)
 				ds_list_add(global.saveroom, 117779)
 				ds_list_add(global.saveroom, 117722)
 				ds_list_add(global.saveroom, 118477)
@@ -1234,7 +1385,11 @@ function levelselect_prep_levelsecret(argument0, argument1)
 			}
 			else if(argument1 == 4)
 			{
+				global.fill = 1620
 				global.panic = 1
+				global.minutes = 2
+				global.seconds = 15
+				ds_list_add(global.saveroom, 117218)
 				ds_list_add(global.saveroom, 118477)
 				ds_list_add(global.saveroom, 117722)
 				ds_list_add(global.saveroom, 118443)
